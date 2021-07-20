@@ -1,5 +1,5 @@
 {
-  "name": "arrow-challenge",
+  "name": "project-management-app",
   "private": true,
   "dependencies": {
     "@rails/actioncable": "^6.0.0",

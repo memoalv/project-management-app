@@ -10,7 +10,7 @@ services:
       # We'll store the postgres data in the 'postgres_data' volume we defined:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - ${ARROW_CHALLENGE_PG_PORT:-5432}:5432
+      - ${PROJECT_MANAGEMENT_APP_PG_PORT:-5432}:5432
     environment:
       POSTGRES_PASSWORD: 3x4mpl3P455w0rd
 
@@ -22,7 +22,7 @@ services:
     # (otherwise Chrome won't be able to find files).
     # NOTE: Make sure you use absolute paths in `#attach_file`.
     volumes:
-      - .:${PWD:-/srv/arrow-challenge}:cached
+      - .:${PWD:-/srv/project-management-app}:cached
     environment:
       # By default, it uses 3000, which is typically used by Rails.
       PORT: 3333
