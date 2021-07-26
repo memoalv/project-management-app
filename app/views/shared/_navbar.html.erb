@@ -1,0 +1,13 @@
+<nav class="navbar sticky-top navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="/">Project management app</a>
+    <span>
+      <% if user_signed_in? %>
+        <%= link_to "Edit profile", edit_user_registration_path, class: "link-light me-2" %>
+        <%= link_to "Sign out", destroy_user_session_path, method: 'delete', class: "link-light" %>
+      <% else %>
+        <%= link_to "Sign up", new_user_registration_path, class: "link-light" %>
+      <% end %>
+    </span>
+  </div>
+</nav>
