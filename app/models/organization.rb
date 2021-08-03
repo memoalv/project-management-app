@@ -23,8 +23,8 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Organization < ApplicationRecord
-  belongs_to :user
-  belongs_to :plan
+  belongs_to :user, inverse_of: :organization
+  belongs_to :plan, inverse_of: :organizations
 
   validates :name, presence: true, uniqueness: true
 

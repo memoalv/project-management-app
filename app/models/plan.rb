@@ -8,7 +8,7 @@
 #  updated_at :datetime         not null
 #
 class Plan < ApplicationRecord
-  has_many :organizations
+  has_many :organizations, inverse_of: :plan
 
   validates :name, presence: true, uniqueness: true
 

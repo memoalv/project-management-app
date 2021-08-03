@@ -9,8 +9,8 @@ RSpec.describe Organization, type: :model do
   it { is_expected.to be_valid }
 
   describe 'associations' do
-    it { should belong_to(:plan) }
-    it { should belong_to(:user) }
+    it { should belong_to(:plan).inverse_of(:organizations) }
+    it { should belong_to(:user).inverse_of(:organization) }
   end
 
   describe 'validations' do

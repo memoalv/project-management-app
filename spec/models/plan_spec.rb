@@ -6,7 +6,7 @@ RSpec.describe Plan, type: :model do
   it { is_expected.to be_valid }
 
   describe 'associations' do
-    it { should have_many(:organizations) }
+    it { should have_many(:organizations).inverse_of(:plan) }
   end
 
   describe 'validations' do

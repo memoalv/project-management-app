@@ -23,7 +23,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_one :organization, dependent: :destroy
+  has_one :organization, dependent: :destroy, inverse_of: :user
   
   accepts_nested_attributes_for :organization
 end
