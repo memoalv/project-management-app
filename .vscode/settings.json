@@ -19,5 +19,8 @@
   "solargraph.autoformat": true,
   "solargraph.diagnostics": true,
   "solargraph.formatting": true,
-  "solargraph.useBundler": true
+  "solargraph.useBundler": true,
+  "emmet.includeLanguages": {
+    "erb": "html"
+  }
 }
