@@ -27,4 +27,27 @@ class Organization < ApplicationRecord
   belongs_to :plan
 
   validates :name, presence: true, uniqueness: true
+
+  with_options if: :premium_plan? do |model|
+    model.validates :card_number,
+                    presence: true,
+                    format: { with: /([0-9])+/, message: 'Field must contain only numbers' },
+                    length: { is: 16 }
+    model.validates :cvv,
+                    presence: true,
+                    format: { with: /([0-9])+/, message: 'Field must contain only numbers' },
+                    length: { is: 3 }
+    model.validates :expiration_date,
+                    presence: true,
+                    format: { with: /([0-9]{4}-[01][0-9]-[0-3][0-9])/, message: 'Invalid date format' }
+  end
+
+  # FIXME: hacky solution?
+  def premium_plan?
+    if !plan.nil?
+      plan.premium?
+    else
+      false
+    end
+  end
 end
