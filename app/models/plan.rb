@@ -9,4 +9,10 @@
 #
 class Plan < ApplicationRecord
   has_many :organizations
+
+  validates :name, presence: true, uniqueness: true
+
+  def premium?
+    name == 'Premium'
+  end
 end
