@@ -31,11 +31,11 @@ class Organization < ApplicationRecord
   with_options if: :premium_plan? do |model|
     model.validates :card_number,
                     presence: true,
-                    format: { with: /([0-9]{16})/, message: 'Field must contain only numbers' },
+                    format: { with: /([0-9]{16})/, message: 'must contain only numbers' },
                     length: { is: 16 }
     model.validates :cvv,
                     presence: true,
-                    format: { with: /([0-9]{3})/, message: 'Field must contain only numbers' },
+                    format: { with: /([0-9]{3})/, message: 'must contain only numbers' },
                     length: { is: 3 }
     model.validates :expiration_date,
                     presence: true,

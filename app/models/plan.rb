@@ -12,6 +12,8 @@ class Plan < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
 
+  scope :default_plan, -> { find_by name: 'Free' }
+
   def premium?
     name == 'Premium'
   end
