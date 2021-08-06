@@ -25,6 +25,7 @@
 class Organization < ApplicationRecord
   belongs_to :user, inverse_of: :organization
   belongs_to :plan, inverse_of: :organizations
+  has_many :projects, inverse_of: :organization
 
   validates :name, presence: true, uniqueness: true
 

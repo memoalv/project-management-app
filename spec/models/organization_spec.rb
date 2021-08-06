@@ -11,6 +11,7 @@ RSpec.describe Organization, type: :model do
   describe 'associations' do
     it { should belong_to(:plan).inverse_of(:organizations) }
     it { should belong_to(:user).inverse_of(:organization) }
+    it { should have_many(:projects).inverse_of(:organization) }
   end
 
   describe 'validations' do
