@@ -3,8 +3,8 @@
 # Table name: organizations
 #
 #  id              :bigint           not null, primary key
-#  card_number     :integer
-#  cvv             :integer
+#  card_number     :string
+#  cvv             :string
 #  expiration_date :date
 #  name            :string
 #  created_at      :datetime         not null
