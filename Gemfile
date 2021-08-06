@@ -76,6 +76,8 @@ group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 3.35', '>= 3.35.3'
 
+  gem 'database_cleaner-active_record'
+
   # Cuprite is a modern Capybara driver which uses Chrome CDP API
   gem 'cuprite', '~> 0.13'
   gem 'test-prof', '~> 1.0', '>= 1.0.1'
