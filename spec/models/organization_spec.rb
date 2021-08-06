@@ -32,6 +32,11 @@ RSpec.describe Organization, type: :model do
       it { should_not allow_value('123412341234123456').for(:card_number) }
       it { should_not allow_value('123ab23412341234').for(:card_number) }
       it { should_not allow_value('ab').for(:card_number) }
+
+      it { should allow_value('123').for(:cvv) }
+      it { should_not allow_value('1234').for(:cvv) }
+      it { should_not allow_value('abc').for(:cvv) }
+      it { should_not allow_value('a1c').for(:cvv) }
     end
 
     context 'Free plan' do
