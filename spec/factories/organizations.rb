@@ -22,7 +22,6 @@
 FactoryBot.define do
   factory :organization do
     name { 'MyString' }
-    user { nil }
     plan { nil }
     card_number { '' }
     cvv { '' }
