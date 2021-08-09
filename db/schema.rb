@@ -10,14 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_06_222034) do
+ActiveRecord::Schema.define(version: 2021_08_09_215937) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "organizations", force: :cascade do |t|
     t.string "name"
-    t.bigint "user_id", null: false
     t.bigint "plan_id", null: false
     t.string "card_number"
     t.string "cvv"
@@ -25,7 +24,6 @@ ActiveRecord::Schema.define(version: 2021_08_06_222034) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["plan_id"], name: "index_organizations_on_plan_id"
-    t.index ["user_id"], name: "index_organizations_on_user_id"
   end
 
   create_table "plans", force: :cascade do |t|
@@ -53,11 +51,13 @@ ActiveRecord::Schema.define(version: 2021_08_06_222034) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "type"
+    t.bigint "organization_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["organization_id"], name: "index_users_on_organization_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "organizations", "plans"
-  add_foreign_key "organizations", "users"
   add_foreign_key "projects", "organizations"
+  add_foreign_key "users", "organizations"
 end
