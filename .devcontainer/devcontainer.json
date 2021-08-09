@@ -51,6 +51,7 @@
 
     // Search modules, class and methods in ruby files using vscode go to symbol:
     "miguel-savignano.ruby-symbols",
-    "aliariff.vscode-erb-beautify"
+    "aliariff.vscode-erb-beautify",
+    "gruntfuggly.todo-tree"
   ]
 }
