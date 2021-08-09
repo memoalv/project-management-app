@@ -28,11 +28,13 @@ FactoryBot.define do
     sequence(:email) { |n| "admin_#{n}@test.com" }
     password { 'crazy_pwd' }
     type { 'Admin' }
+    association :organization
   end
 
   factory :member do
     sequence(:email) { |n| "member_#{n}@test.com" }
     password { 'crazy_pwd' }
     type { 'Member' }
+    association :organization
   end
 end
