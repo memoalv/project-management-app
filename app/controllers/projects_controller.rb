@@ -1,4 +1,8 @@
 class ProjectsController < ApplicationController
+  def index
+    @projects = current_user.organization.projects if current_user.admin?
+  end
+
   def new
     @project = Project.new
   end

@@ -5,5 +5,5 @@ Rails.application.routes.draw do
 
   root to: 'home#show'
 
-  resources :projects, only: %i[new create]
+  resources :projects, only: %i[index new create]
 end

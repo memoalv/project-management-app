@@ -30,6 +30,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   belongs_to :organization, inverse_of: :users
-  
+
   accepts_nested_attributes_for :organization
+
+  def admin?
+    type == 'Admin'
+  end
 end
