@@ -21,6 +21,7 @@
         <td><%= project.details %></td>
         <td><%= project.expected_completion %></td>
         <td>
+          <%= link_to "Edit", edit_project_path(project) %>
           <%= link_to "Delete", project_path(project), class: "text-danger",  data: { method: :delete, confirm: "Are you sure you want to destroy this record?" } %>
         </td>
       </tr>
