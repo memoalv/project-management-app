@@ -11,10 +11,23 @@ class ProjectsController < ApplicationController
     @project = current_user.organization.projects.build(project_params)
 
     if @project.save
-      # TODO: redirect to organizations home
       redirect_to projects_path, notice: 'The project was created successfully'
     else
       render :new, alert: 'The project could not be saved'
+    end
+  end
+
+  def edit
+    @project = Project.find(params[:id])
+  end
+
+  def update
+    @project = Project.find(params[:id])
+
+    if @project.update(project_params)
+      redirect_to projects_path, notice: 'The project was updated successfully'
+    else
+      render :edit
     end
   end
 
