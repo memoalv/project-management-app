@@ -11,11 +11,17 @@
 #  type                   :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  organization_id        :bigint
 #
 # Indexes
 #
 #  index_users_on_email                 (email) UNIQUE
+#  index_users_on_organization_id       (organization_id)
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (organization_id => organizations.id)
 #
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
@@ -23,7 +29,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_one :organization, dependent: :destroy, inverse_of: :user
-  
+  belongs_to :organization, inverse_of: :users
+
   accepts_nested_attributes_for :organization
+
+  def admin?
+    type == 'Admin'
+  end
 end

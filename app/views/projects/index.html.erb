@@ -1,0 +1,29 @@
+<header>
+  <div class="display-6"> <%= current_user.organization.name %> </div>
+  <section class="d-flex align-items-center justify-content-between mt-2">
+    <h2>Projects</h2>
+    <%= link_to "New project", new_project_path, class: "btn btn-primary" %>
+  </section>
+</header>
+<table class="table table-hover mt-2">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Details</th>
+      <th scope="col">Expected completion date</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <th scope="row"><%= project.title %></th>
+        <td><%= project.details %></td>
+        <td><%= project.expected_completion %></td>
+        <td>
+          <%= link_to "Delete", project_path(project), class: "text-danger",  data: { method: :delete, confirm: "Are you sure you want to destroy this record?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

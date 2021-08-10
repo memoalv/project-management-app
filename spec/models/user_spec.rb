@@ -10,6 +10,6 @@ RSpec.describe User, type: :model do
   end
 
   describe 'associations' do
-    it { should have_one(:organization).dependent(:destroy).inverse_of(:user) }
+    it { should belong_to(:organization).inverse_of(:users) }
   end
 end

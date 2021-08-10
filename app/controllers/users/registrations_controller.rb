@@ -6,15 +6,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
-    @user = Admin.new
-    @user.organization = Organization.new
-    @user.organization.plan = Plan.default_plan
+    super do
+      @user = Admin.new
+      @user.organization = Organization.new
+      @user.organization.plan = Plan.default_plan
+    end
   end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super do
+      @user.type = 'Admin'
+      @user.save
+    end
+  end
 
   # GET /resource/edit
   # def edit

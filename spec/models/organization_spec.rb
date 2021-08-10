@@ -1,16 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Organization, type: :model do
-  let(:admin) { create(:admin) }
   let(:premium_plan) { create(:plan, name: 'Premium') }
   let(:free_plan) { create(:plan, name: 'Free') }
-  subject { build(:organization, user_id: admin.id, plan_id: free_plan.id) }
+  subject { build(:organization, plan_id: free_plan.id) }
 
   it { is_expected.to be_valid }
 
   describe 'associations' do
     it { should belong_to(:plan).inverse_of(:organizations) }
-    it { should belong_to(:user).inverse_of(:organization) }
+    it { should have_many(:users).inverse_of(:organization) }
+    it { should have_many(:projects).inverse_of(:organization) }
   end
 
   describe 'validations' do
@@ -19,7 +19,6 @@ RSpec.describe Organization, type: :model do
     context 'Premium plan' do
       subject do
         build(:organization,
-              user_id: admin.id,
               plan_id: premium_plan.id)
       end
 
