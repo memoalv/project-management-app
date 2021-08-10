@@ -20,7 +20,9 @@
         <th scope="row"><%= project.title %></th>
         <td><%= project.details %></td>
         <td><%= project.expected_completion %></td>
-        <td>todo</td>
+        <td>
+          <%= link_to "Delete", project_path(project), class: "text-danger",  data: { method: :delete, confirm: "Are you sure you want to destroy this record?" } %>
+        </td>
       </tr>
     <% end %>
   </tbody>
