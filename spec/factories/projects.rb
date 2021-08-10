@@ -20,9 +20,9 @@
 #
 FactoryBot.define do
   factory :project do
-    organization { nil }
-    title { "MyString" }
-    details { "MyText" }
+    association :organization
+    title { "My important project" }
+    details { "Super details" }
     expected_completion { "2021-08-06" }
   end
 end

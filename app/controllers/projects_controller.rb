@@ -11,8 +11,8 @@ class ProjectsController < ApplicationController
     @project = current_user.organization.projects.build(project_params)
 
     if @project.save
-      #TODO: redirect to organizations home
-      render :home, notice: 'The project was created successfully'
+      # TODO: redirect to organizations home
+      redirect_to projects_path, notice: 'The project was created successfully'
     else
       render :new, alert: 'The project could not be saved'
     end
