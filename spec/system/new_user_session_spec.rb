@@ -10,7 +10,7 @@ RSpec.describe 'New user session', type: :system do
       fill_in 'Password', with: 'crazy_pwd'
       click_on 'Log in'
 
-      expect(page).to have_content('Sign out')
+      expect(page).to have_selector(:css, '.feather.feather-more-vertical')
     end
   end
 

@@ -14,7 +14,7 @@ RSpec.describe 'New user registration', type: :system do
     fill_in 'Organization', with: 'My first org'
     click_on 'Sign up'
 
-    expect(page).to have_content('Sign out')
+    expect(page).to have_selector(:css, '.feather.feather-more-vertical')
   end
 
   scenario 'Newly registered user should be an Admin' do
@@ -27,7 +27,7 @@ RSpec.describe 'New user registration', type: :system do
 
     registed_user = User.last
 
-    expect(page).to have_content('Sign out')
+    expect(page).to have_selector(:css, '.feather.feather-more-vertical')
     expect(registed_user.type).to eql 'Admin'
   end
 
