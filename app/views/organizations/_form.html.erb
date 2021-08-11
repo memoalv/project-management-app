@@ -1,0 +1,33 @@
+<section data-controller="signup">
+  <div class="field">
+    <%= f.label :name, "Organization's name" %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :plan_id, 'Plan' %><br />
+    <%= f.collection_select :plan_id, Plan.all, :id, :name, {}, data: {
+                                                                        :'signup-target' =>'plan',
+                                                                        action: 'change->signup#toggleCardFields' 
+                                                                      } %>
+</div>
+  <div class="d-none card-fields" data-signup-target="cardFields">
+    <div class="field">
+      <%= f.label :card_number %><br />
+      <%= f.text_field :card_number %>
+    </div>
+    <div class="field">
+      <%= f.label :cvv %><br />
+      <%= f.text_field :cvv %>
+    </div>
+    <div class="field">
+      <%= f.label :expiration_date %><br />
+      <%= f.date_select :expiration_date, { 
+                                            discard_day: true, 
+                                            end_year: Date.today.year + 10, 
+                                            order: [:month, :year],
+                                            start_year: Date.today.year, 
+                                            use_two_digit_numbers: true
+                                          } %>
+    </div>
+  </div>
+</section>

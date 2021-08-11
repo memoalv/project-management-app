@@ -22,7 +22,7 @@ RSpec.describe 'New user registration', type: :system do
     fill_in 'Email', with: 'email@email.com'
     fill_in 'Password', with: 'crazy_pwd'
     fill_in 'Password confirmation', with: 'crazy_pwd'
-    fill_in 'Organization', with: 'My first org'
+    fill_in "Organization's name", with: 'My first org'
     click_on 'Sign up'
 
     registed_user = User.last
@@ -37,7 +37,7 @@ RSpec.describe 'New user registration', type: :system do
       fill_in 'Email', with: 'email'
       fill_in 'Password', with: 'crazy_pwd'
       fill_in 'Password confirmation', with: 'crazy_pwd'
-      fill_in 'Organization', with: 'My first org'
+      fill_in "Organization's name", with: 'My first org'
       click_on 'Sign up'
 
       invalid_email_field = page.find(:field, 'Email',
