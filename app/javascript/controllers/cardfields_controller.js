@@ -4,15 +4,15 @@ export default class extends Controller {
   static targets = ["plan", "cardFields"]
 
   connect() {
-    this.toggleCardFields()
+    this.toggle()
   }
 
-  toggleCardFields() {
+  toggle() {
     if(this.premiumPlanSelected()) {
-      this.showCardFields()
+      this.show()
     }
     else {
-      this.hideCardFields()
+      this.hide()
     }
   }
 
@@ -23,14 +23,14 @@ export default class extends Controller {
     return selectedOption == 'Premium'
   }
 
-  showCardFields() {
+  show() {
     const cardFields = this.cardFieldsTarget
 
     cardFields.classList.add("d-flex");
     cardFields.classList.remove("d-none");
   }
 
-  hideCardFields() {
+  hide() {
     const cardFields = this.cardFieldsTarget
     
     cardFields.classList.remove("d-flex");

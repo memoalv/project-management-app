@@ -1,4 +1,4 @@
-<section data-controller="signup">
+<section data-controller="cardfields">
   <div class="field">
     <%= f.label :name, "Organization's name" %><br />
     <%= f.text_field :name %>
@@ -6,11 +6,11 @@
   <div class="field">
     <%= f.label :plan_id, 'Plan' %><br />
     <%= f.collection_select :plan_id, Plan.all, :id, :name, {}, data: {
-                                                                        :'signup-target' =>'plan',
-                                                                        action: 'change->signup#toggleCardFields' 
+                                                                        :'cardfields-target' =>'plan',
+                                                                        action: 'change->cardfields#toggle' 
                                                                       } %>
 </div>
-  <div class="d-none card-fields" data-signup-target="cardFields">
+  <div class="d-none card-fields" data-cardfields-target="cardFields">
     <div class="field">
       <%= f.label :card_number %><br />
       <%= f.text_field :card_number %>
