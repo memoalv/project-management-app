@@ -12,6 +12,9 @@
   <body>
     <%= render 'shared/navbar' %>
     <main class="container">
+      <% if !devise_controller? && user_signed_in? %>
+        <div class="display-6 mt-2"> <%= current_user.organization.name %> </div>
+      <% end %>
       <%= render 'shared/alerts' %>
       <%= yield %>
     </main>
