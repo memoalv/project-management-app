@@ -1,33 +1,33 @@
 <section data-controller="cardfields">
   <div class="field">
-    <%= f.label :name, "Organization's name" %><br />
-    <%= f.text_field :name %>
+    <%= f.label :name, "Organization's name", class: "form-label" %>
+    <%= f.text_field :name, class: "form-control" %>
   </div>
   <div class="field">
-    <%= f.label :plan_id, 'Plan' %><br />
+    <%= f.label :plan_id, 'Plan', class: "form-label" %>
     <%= f.collection_select :plan_id, Plan.all, :id, :name, {}, data: {
                                                                         :'cardfields-target' =>'plan',
                                                                         action: 'change->cardfields#toggle' 
-                                                                      } %>
+                                                                      }, class: "form-control" %>
 </div>
   <div class="d-none card-fields" data-cardfields-target="cardFields">
     <div class="field">
-      <%= f.label :card_number %><br />
-      <%= f.text_field :card_number %>
+      <%= f.label :card_number, class: "form-label" %>
+      <%= f.text_field :card_number, class: "form-control" %>
     </div>
     <div class="field">
-      <%= f.label :cvv %><br />
-      <%= f.text_field :cvv %>
+      <%= f.label :cvv, class: "form-label" %>
+      <%= f.text_field :cvv, class: "form-control" %>
     </div>
     <div class="field">
-      <%= f.label :expiration_date %><br />
+      <%= f.label :expiration_date, class: "form-label" %>
       <%= f.date_select :expiration_date, { 
                                             discard_day: true, 
                                             end_year: Date.today.year + 10, 
                                             order: [:month, :year],
                                             start_year: Date.today.year, 
                                             use_two_digit_numbers: true
-                                          } %>
+                                          }, class: "form-control" %>
     </div>
   </div>
 </section>
