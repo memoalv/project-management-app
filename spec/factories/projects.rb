@@ -4,6 +4,7 @@
 #
 #  id                  :bigint           not null, primary key
 #  details             :text
+#  discarded_at        :datetime
 #  expected_completion :date
 #  title               :string
 #  created_at          :datetime         not null
@@ -12,6 +13,7 @@
 #
 # Indexes
 #
+#  index_projects_on_discarded_at     (discarded_at)
 #  index_projects_on_organization_id  (organization_id)
 #
 # Foreign Keys
