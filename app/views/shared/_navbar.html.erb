@@ -1,8 +1,12 @@
 <nav class="navbar sticky-top navbar-dark bg-dark">
   <div class="container-fluid">
+    <% if user_signed_in? %>
+      <%= link_to "Project management app", projects_path, class: "navbar-brand text-white" %>
+    <% else %>
     <a class="navbar-brand text-white" href="/">
       Project management app
     </a>
+    <% end %>
     <span>
       <% if user_signed_in? %>
         <div class="dropdown">
@@ -11,7 +15,7 @@
           </a>
           <div class="dropdown-menu dropdown-menu-end">
             <%= link_to "Edit profile", edit_user_registration_path, class: "dropdown-item" %>
-            <%= link_to "Edit organization", edit_user_registration_path, class: "dropdown-item" %>
+            <%= link_to "Edit organization", edit_organization_path(current_user.organization), class: "dropdown-item" %>
             <hr class="dropdown-divider">
             <%= link_to "Sign out", destroy_user_session_path, method: 'delete', class: "dropdown-item" %>
           </div>
