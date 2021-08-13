@@ -54,4 +54,8 @@ class Organization < ApplicationRecord
 
     projects.where.not(id: most_recent_project.id).discard_all
   end
+
+  def restore_projects
+    projects.undiscard_all
+  end
 end

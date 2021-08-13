@@ -77,4 +77,24 @@ RSpec.describe Organization, type: :model do
       expect(kept_project.title).to eql 'recent_project'
     end
   end
+
+  describe '#restore_projects' do
+    it 'restores all discarded projects' do
+      project1 = create(:project, organization: organization)
+      project1.created_at = 2.days.ago
+      project1.save
+
+      project2 = create(:project, organization: organization)
+      project2.created_at = 1.day.ago
+      project2.save
+
+      organization.projects.discard_all
+
+      organization.restore_projects
+
+      expect(organization.projects.size).to eql 2
+      expect(organization.projects.kept.size).to eql 2
+      expect(organization.projects.discarded.size).to eql 0
+    end
+  end
 end
