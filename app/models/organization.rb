@@ -52,10 +52,10 @@ class Organization < ApplicationRecord
   def discard_old_projects
     most_recent_project = projects.by_created.first
 
-    projects.where.not(id: most_recent_project.id).discard_all
+    projects.where.not(id: most_recent_project.id).discard_all! unless most_recent_project.nil?
   end
 
   def restore_projects
-    projects.undiscard_all
+    projects.undiscard_all!
   end
 end

@@ -6,7 +6,22 @@ class OrganizationsController < ApplicationController
   def update
     @organization = Organization.find(params[:id])
 
-    if @organization.update(organization_params)
+    trx_success = true
+    begin
+      ApplicationRecord.transaction do
+        @organization.update!(organization_params)
+
+        if @organization.plan.premium?
+          @organization.restore_projects
+        else
+          @organization.discard_old_projects
+        end
+      end
+    rescue
+      trx_success = false
+    end
+
+    if trx_success
       redirect_to helpers.home_path, notice: 'The organization was updated successfully'
     else
       render :edit

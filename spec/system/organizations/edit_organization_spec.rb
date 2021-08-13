@@ -12,10 +12,41 @@ RSpec.describe 'Edit organization', type: :system do
 
   context 'with valid input' do
     scenario 'Edits an organization correctly' do
-      fill_in "Organization's name", with: 'Modified orgs name'
+      fill_in "Organization's name", with: 'New name'
       click_on 'Save organization'
 
-      expect(page).to have_content 'Modified orgs name'
+      expect(page).to have_content 'New name'
+    end
+
+    scenario 'Changing from plan premium to free discards all but the most recent project' do
+      create(:project, title: 'recent project', organization: user.organization, created_at: 1.day.ago)
+      create(:project, organization: user.organization, created_at: 3.days.ago)
+      create(:project, organization: user.organization, created_at: 5.days.ago)
+
+      select 'Free', from: 'Plan'
+      click_on 'Save organization'
+
+      org_projects = user.organization.projects
+      expect(org_projects.size).to eql 3
+      expect(org_projects.kept.size).to eql 1
+      expect(org_projects.discarded.size).to eql 2
+      expect(org_projects.kept.first.title).to eql 'recent project'
+    end
+
+    scenario 'Changing from plan free to premium restores discarded projects' do
+      create(:plan, name: 'Premium')
+      
+      create(:project, organization: user.organization, discarded_at: 3.days.ago)
+      create(:project, organization: user.organization, discarded_at: 5.days.ago)
+
+      select 'Premium', from: 'Plan'
+      fill_in 'Card number', with: '4444444444444444'
+      fill_in 'Cvv', with: '123'
+      click_on 'Save organization'
+
+      org_projects = user.organization.projects
+      expect(org_projects.kept.size).to eql 2
+      expect(org_projects.discarded.size).to eql 0
     end
   end
 
@@ -39,7 +70,7 @@ RSpec.describe 'Edit organization', type: :system do
 
     scenario 'Shows card fields for premium plan' do
       create(:plan, name: 'Premium')
-      
+
       select 'Premium', from: 'Plan'
 
       expect(page).to have_content('Card number')

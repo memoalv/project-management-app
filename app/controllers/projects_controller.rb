@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   def index
-    @projects = current_user.organization.projects if current_user.admin?
+    @projects = current_user.organization.projects.kept if current_user.admin?
   end
 
   def new
