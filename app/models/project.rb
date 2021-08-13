@@ -28,4 +28,6 @@ class Project < ApplicationRecord
   validates :title, presence: true
   validates :details, presence: true
   validates :expected_completion, presence: true
+
+  scope :by_created, -> { order(created_at: :desc) }
 end
