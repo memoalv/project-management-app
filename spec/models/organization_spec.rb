@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe Organization, type: :model do
   let(:premium_plan) { create(:plan, name: 'Premium') }
   let(:free_plan) { create(:plan, name: 'Free') }
+  let(:organization) { create(:organization, name: 'Icalia') }
+
   subject { build(:organization, plan_id: free_plan.id) }
 
   it { is_expected.to be_valid }
@@ -42,6 +44,37 @@ RSpec.describe Organization, type: :model do
       it { should_not validate_presence_of(:card_number) }
       it { should_not validate_presence_of(:cvv) }
       it { should_not validate_presence_of(:expiration_date) }
+    end
+  end
+
+  describe '#discard_old_projects' do
+    before(:each) do
+      project1 = create(:project, organization: organization)
+      project1.created_at = 2.days.ago
+      project1.save
+
+      project2 = create(:project, title: 'recent_project', organization: organization)
+      project2.created_at = 1.day.ago
+      project2.save
+
+      project3 = create(:project, organization: organization)
+      project3.created_at = 5.days.ago
+      project3.save
+    end
+
+    it 'discards all but one project for the organization' do
+      organization.discard_old_projects
+
+      expect(organization.projects.size).to eql 3
+      expect(organization.projects.kept.size).to eql 1
+      expect(organization.projects.discarded.size).to eql 2
+    end
+
+    it 'only most recent project should be kept' do
+      organization.discard_old_projects
+
+      kept_project = organization.projects.kept.first
+      expect(kept_project.title).to eql 'recent_project'
     end
   end
 end

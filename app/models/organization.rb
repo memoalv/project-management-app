@@ -48,4 +48,10 @@ class Organization < ApplicationRecord
       false
     end
   end
+
+  def discard_old_projects
+    most_recent_project = projects.by_created.first
+
+    projects.where.not(id: most_recent_project.id).discard_all
+  end
 end
