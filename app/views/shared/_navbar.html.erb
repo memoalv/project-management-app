@@ -1,10 +1,25 @@
 <nav class="navbar sticky-top navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand text-white" href="/">Project management app</a>
+    <% if user_signed_in? %>
+      <%= link_to "Project management app", projects_path, class: "navbar-brand text-white" %>
+    <% else %>
+    <a class="navbar-brand text-white" href="/">
+      Project management app
+    </a>
+    <% end %>
     <span>
       <% if user_signed_in? %>
-        <%= link_to "Edit profile", edit_user_registration_path, class: "link-light me-2" %>
-        <%= link_to "Sign out", destroy_user_session_path, method: 'delete', class: "link-light" %>
+        <div class="dropdown">
+          <a href="#" class="text-light" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i data-feather="more-vertical"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end">
+            <%= link_to "Edit profile", edit_user_registration_path, class: "dropdown-item" %>
+            <%= link_to "Edit organization", edit_organization_path(current_user.organization), class: "dropdown-item" %>
+            <hr class="dropdown-divider">
+            <%= link_to "Sign out", destroy_user_session_path, method: 'delete', class: "dropdown-item" %>
+          </div>
+        </div>
       <% elsif controller_name == 'registrations' %>
         <%= link_to "Log in", new_user_session_path, class: "link-light" %>
       <% elsif controller_name == 'sessions' %>

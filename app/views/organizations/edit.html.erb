@@ -1,0 +1,10 @@
+<h1>Edit organization</h1>
+<hr class="h-divider" />
+<%= render partial: 'shared/validation_errors', locals: { model: @organization } %>
+<%= form_with model: @organization do |f| %>
+  <%= render partial: 'organizations/form', locals: { f: f } %>
+  <div class="mt-2 d-flex justify-content-between">
+    <%= link_to 'Back', :back, class:"btn btn-secondary" %>
+    <%= f.submit 'Save organization', class: 'btn btn-primary' %>
+  </div>
+<% end %>

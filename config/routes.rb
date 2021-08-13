@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   root to: 'home#show'
 
-  resources :organizations, only: %i[edit]
+  resources :organizations, only: %i[edit update]
 
   resources :projects, only: %i[index new create edit update destroy]
 end
