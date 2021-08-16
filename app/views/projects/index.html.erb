@@ -16,7 +16,7 @@
   <tbody>
     <% @projects.each do |project| %>
       <tr>
-        <th scope="row"><%= project.title %></th>
+        <th scope="row"><%= link_to project.title, project_path(project) %></th>
         <td><%= project.details %></td>
         <td><%= project.expected_completion %></td>
         <td>
