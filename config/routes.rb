@@ -7,5 +7,5 @@ Rails.application.routes.draw do
 
   resources :organizations, only: %i[edit update]
 
-  resources :projects, only: %i[index new create edit update destroy]
+  resources :projects, only: %i[index new show create edit update destroy]
 end
