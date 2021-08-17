@@ -18,6 +18,7 @@
 #
 class Artifact < ApplicationRecord
   belongs_to :project, inverse_of: :artifacts
+  has_many_attached :files
 
   validates :name, presence: true
 end
