@@ -24,6 +24,7 @@ class Project < ApplicationRecord
   include Discard::Model
   
   belongs_to :organization, inverse_of: :projects
+  has_many :artifacts, inverse_of: :project
 
   validates :title, presence: true
   validates :details, presence: true

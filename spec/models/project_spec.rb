@@ -5,6 +5,7 @@ RSpec.describe Project, type: :model do
 
   describe 'associations' do
     it { should belong_to(:organization).inverse_of(:projects) }
+    it { should have_many(:artifacts).inverse_of(:project) }
   end
 
   describe 'validations' do
